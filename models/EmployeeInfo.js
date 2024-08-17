@@ -1,6 +1,11 @@
 const { default: mongoose } = require("mongoose");
 
 const EmployeeInfoSchema = mongoose.Schema({
+  employee_id: {
+    type: String,
+    required: [true, "employee_id is required"],
+    unique: [true, "employee_id must be unique"],
+  },
   username: {
     type: String,
     required: [true, "username is required"],
@@ -32,14 +37,13 @@ const EmployeeInfoSchema = mongoose.Schema({
   shift: {
     type: String,
     default: "morning",
-    enum: ["morning", "night"],
+    enum: ["morning", "night", "evening"],
   },
   date_of_birth: {
     type: Date,
   },
   martial_status: {
     type: String,
-    required: [true, "martial status is required"],
     enum: ["single", "married"],
   },
   state: {
@@ -69,7 +73,10 @@ const EmployeeInfoSchema = mongoose.Schema({
     required: [true, "gender is required"],
     enum: ["male", "female", "others"],
   },
-  address: {
+  current_address: {
+    type: String,
+  },
+  permanent_address: {
     type: String,
   },
   country: {
@@ -79,6 +86,57 @@ const EmployeeInfoSchema = mongoose.Schema({
     type: String,
   },
   home_phone: {
+    type: String,
+  },
+  hired_date: {
+    type: Date,
+    required: [true, "hired date is required"],
+  },
+  religion: {
+    type: String,
+  },
+  guardian: {
+    type: String,
+  },
+
+  location_name: {
+    type: String,
+  },
+
+  // table
+  // work_calander: {
+  //   type: String,
+  //   default: "Monday to Friday",
+  // },
+
+  // table
+  // employee_type
+  // designation: {
+  //   type: String,
+  // },
+
+  payroll: {
+    type: String,
+  },
+
+  // table
+  // employee_grade
+  // department_name: {
+  //   type: String,
+  // },
+
+  working_status: {
+    type: String,
+    default: "active",
+    enum: ["active", "inactive"],
+  },
+  is_sales_representative: {
+    type: Boolean,
+  },
+  is_delivery_man: {
+    type: Boolean,
+  },
+  supervisor: {
     type: String,
   },
 });

@@ -9,6 +9,11 @@ router
 router
   .route("/:employeeId")
   .get(getEmployeesInfo.getEmployeeInfo)
-  .delete(getEmployeesInfo.deleteEmployeeInfo);
+  .delete(getEmployeesInfo.deleteEmployeeInfo)
+  .patch(getEmployeesInfo.updateEmployeeInfo);
+
+router.route("/id/:employeeId").get(getEmployeesInfo.getEmployeeByEmployeeId);
+
+router.route("/username/:username").get(getEmployeesInfo.getEmployeeByUsername);
 
 module.exports = router;

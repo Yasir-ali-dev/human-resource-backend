@@ -6,6 +6,11 @@ const errorHandler = (err, req, res, next) => {
     message: err.message || "Internal Server Error",
   };
 
+  if (err.name === "CastError") {
+    (customError.statusCode = StatusCodes.BAD_REQUEST),
+      (customError.message = `Invalid ${err.path}: ${err.value}`);
+  }
+
   if (err.name === "ValidationError") {
     customError.statusCode = StatusCodes.BAD_REQUEST;
     customError.message = `${Object.values(err.errors).map(
