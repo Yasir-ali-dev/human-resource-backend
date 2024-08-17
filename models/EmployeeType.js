@@ -4,6 +4,8 @@ const employeeTypeSchema = mongoose.Schema({
   employeeType: {
     type: String,
     required: [true, "employee type is required"],
+    lowercase: true,
+    trim: true,
     enum: [
       "full-time",
       "part-time",
@@ -13,9 +15,11 @@ const employeeTypeSchema = mongoose.Schema({
       "at-will",
     ],
   },
-  designation: {
+  department_name: {
+    lowercase: true,
     type: String,
-    required: [true, "employee type is required"],
+    trim: true,
+    required: [true, "department name is required"],
   },
   is_active: {
     type: Boolean,

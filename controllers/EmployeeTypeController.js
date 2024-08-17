@@ -10,15 +10,15 @@ const getAllEmployeeTypes = async (req, res) => {
 };
 
 const createEmployeeType = async (req, res) => {
-  const { employeeType, designation, is_active } = req.body;
-  if (!employeeType || !designation) {
+  const { employeeType, department_name, is_active } = req.body;
+  if (!employeeType || !department_name) {
     throw new BadRequestError(
-      "employeeType, designation are required fields !"
+      "employeeType, department_name are required fields !"
     );
   }
   const newEmployeeType = await EmployeeType.create({
     employeeType,
-    designation,
+    department_name,
     is_active,
   });
   res.status(StatusCodes.CREATED).json({ newEmployeeType });

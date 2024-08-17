@@ -109,12 +109,6 @@ const EmployeeInfoSchema = mongoose.Schema({
   //   default: "Monday to Friday",
   // },
 
-  // table
-  // employee_type
-  // designation: {
-  //   type: String,
-  // },
-
   payroll: {
     type: String,
   },
