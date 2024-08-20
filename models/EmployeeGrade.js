@@ -16,3 +16,5 @@ const employeeGradeSchema = mongoose.Schema({
   },
 });
 module.exports = mongoose.model("EmployeeGrade", employeeGradeSchema);
+
+/* employee grade should be corrected*/

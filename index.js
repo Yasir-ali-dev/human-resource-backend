@@ -2,6 +2,8 @@ require("express-async-errors");
 require("dotenv").config();
 const express = require("express");
 const dbConfig = require("./db/dbConfig");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 // middlewares
 const errorHandlerMiddleware = require("./middlewares/GlobalErrorHandler");
 const notFoundError = require("./middlewares/NotFound");
@@ -12,18 +14,22 @@ const employeeGradeRouter = require("./routes/EmployeeGradeRoutes");
 const workCalenderRouter = require("./routes/WorkCalenderRoutes");
 const employeePayElementRouter = require("./routes/EmployeePayElementRoutes");
 const employeePerFormanceCriteriaRouter = require("./routes/EmployeePerFormanceCriteriaRoutes");
-const bodyParser = require("body-parser");
+const employeeDesignationRouter = require("./routes/EmployeeDesignationRoutes");
+const employeeSalaryRouter = require("./routes/EmployeeSalaryRoutes");
 const app = express();
 
 // middlewares
 app.use(express.json());
 app.use(bodyParser.json());
+app.use(cors({ origin: "http://localhost:3001" }));
 // endpoints
 app.use("/api/v1/employeesInfo", employeeInfoRouter);
 app.use("/api/v1/employeeTypes", employeeTypeRouter);
 app.use("/api/v1/employeeGrades", employeeGradeRouter);
-app.use("/api/v1/workCalender", workCalenderRouter);
+app.use("/api/v1/workCalenders", workCalenderRouter);
 app.use("/api/v1/employeePayElements", employeePayElementRouter);
+app.use("/api/v1/employeeDesignations", employeeDesignationRouter);
+app.use("/api/v1/employeeSalaries", employeeSalaryRouter);
 app.use(
   "/api/v1/employeePerFormanceCriteria",
   employeePerFormanceCriteriaRouter

@@ -48,7 +48,7 @@ const deleteEmployeePerFormanceCriteriaById = async (req, res) => {
     await EmployeePerFormanceCriteria.findByIdAndDelete(performanceCriteriaId);
   if (!deletedEmployeePerFormanceCriteria) {
     throw new NotFoundError(
-      `work calender not found with ${performanceCriteriaId}`
+      `performance criteria not found with ${performanceCriteriaId}`
     );
   }
   res.status(StatusCodes.OK).json({ deletedEmployeePerFormanceCriteria });
