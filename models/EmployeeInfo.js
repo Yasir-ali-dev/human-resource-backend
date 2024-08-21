@@ -1,4 +1,9 @@
 const { default: mongoose } = require("mongoose");
+const { employeeTypeSchema } = require("./EmployeeType");
+const { employeeGradeSchema } = require("./EmployeeGrade");
+const { workCalenderSchema } = require("./WorkCalender");
+const { employeeJobsSchema } = require("./EmployeeJobs");
+const { employeeDesignationSchema } = require("./EmployeeDesignation");
 
 const EmployeeInfoSchema = mongoose.Schema({
   employee_id: {
@@ -10,6 +15,11 @@ const EmployeeInfoSchema = mongoose.Schema({
     type: String,
     required: [true, "username is required"],
     unique: [true, "username is already taken !"],
+  },
+  department_name: {
+    type: String,
+    required: [true, "email is required"],
+    lowercase: true,
   },
   email: {
     type: String,
@@ -102,22 +112,10 @@ const EmployeeInfoSchema = mongoose.Schema({
   location_name: {
     type: String,
   },
-
-  // table
-  // work_calander: {
-  //   type: String,
-  //   default: "Monday to Friday",
-  // },
-
   payroll: {
     type: String,
+    required: [true, "payroll is required"],
   },
-
-  // table
-  // employee_grade
-  // department_name: {
-  //   type: String,
-  // },
 
   working_status: {
     type: String,
@@ -133,6 +131,30 @@ const EmployeeInfoSchema = mongoose.Schema({
   supervisor: {
     type: String,
   },
+  employeeType: employeeTypeSchema,
+  employeeGrade: employeeGradeSchema,
+  workCalender: workCalenderSchema,
+  employeeJob: employeeJobsSchema,
+  employeeDesignation: employeeDesignationSchema,
+  //
+  employeePayElement: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "EmployeePayElement",
+    },
+  ],
+  employeeSalary: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "EmployeeSalary",
+    },
+  ],
+  employeePerformanceEvaluation: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "EmployeePerformanceEvaluation",
+    },
+  ],
 });
 
 module.exports = mongoose.model("EmployeeInfo", EmployeeInfoSchema);

@@ -1,5 +1,5 @@
 const { StatusCodes } = require("http-status-codes");
-const WorkCalender = require("../models/WorkCalender");
+const { WorkCalender } = require("../models/WorkCalender");
 
 const { BadRequestError, NotFoundError } = require("../errors");
 

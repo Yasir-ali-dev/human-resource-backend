@@ -26,4 +26,8 @@ const employeeTypeSchema = mongoose.Schema({
     default: false,
   },
 });
-module.exports = mongoose.model("EmployeeType", employeeTypeSchema);
+
+module.exports = {
+  employeeTypeSchema,
+  EmployeeType: mongoose.model("EmployeeType", employeeTypeSchema),
+};

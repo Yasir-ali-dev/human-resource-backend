@@ -1,5 +1,5 @@
 const { StatusCodes } = require("http-status-codes");
-const EmployeeGrade = require("../models/EmployeeGrade");
+const { EmployeeGrade } = require("../models/EmployeeGrade");
 const { BadRequestError, NotFoundError } = require("../errors");
 
 const getAllEmployeeGrades = async (req, res) => {
@@ -10,15 +10,13 @@ const getAllEmployeeGrades = async (req, res) => {
 };
 
 const createEmployeeGrade = async (req, res) => {
-  const { employee_grade, designation } = req.body;
-  if (!employee_grade || !designation) {
-    throw new BadRequestError(
-      "employee_grade, designation are required fields !"
-    );
+  const { employee_grade, description } = req.body;
+  if (!employee_grade) {
+    throw new BadRequestError("employee_grade are required fields !");
   }
   const newEmployeeGrade = await EmployeeGrade.create({
     employee_grade,
-    designation,
+    description,
   });
   res.status(StatusCodes.CREATED).json({ newEmployeeGrade });
 };

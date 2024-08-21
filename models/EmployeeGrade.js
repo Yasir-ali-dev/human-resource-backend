@@ -8,13 +8,15 @@ const employeeGradeSchema = mongoose.Schema({
     trim: true,
     enum: ["high-level", "middle-level", "low-level"],
   },
-  designation: {
+  // descrition of employee grade
+  description: {
     lowercase: true,
     type: String,
     trim: true,
-    required: [true, "employee type is required"],
   },
 });
-module.exports = mongoose.model("EmployeeGrade", employeeGradeSchema);
-
+module.exports = {
+  employeeGradeSchema,
+  EmployeeGrade: mongoose.model("EmployeeGrade", employeeGradeSchema),
+};
 /* employee grade should be corrected*/

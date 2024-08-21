@@ -27,5 +27,9 @@ const employeePayElementSchema = mongoose.Schema({
     type: Date,
     required: [true, "end date is required"],
   },
+  employeeInfo: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "EmployeeInfo",
+  },
 });
 module.exports = mongoose.model("EmployeePayElement", employeePayElementSchema);

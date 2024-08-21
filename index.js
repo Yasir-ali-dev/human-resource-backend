@@ -16,12 +16,16 @@ const employeePayElementRouter = require("./routes/EmployeePayElementRoutes");
 const employeePerFormanceCriteriaRouter = require("./routes/EmployeePerFormanceCriteriaRoutes");
 const employeeDesignationRouter = require("./routes/EmployeeDesignationRoutes");
 const employeeSalaryRouter = require("./routes/EmployeeSalaryRoutes");
+const employeeJobRouter = require("./routes/EmployeeJobRoutes");
+const employeeEvaluationRouter = require("./routes/EmployeePerformanceEvaluationRoutes");
+
 const app = express();
 
 // middlewares
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(cors({ origin: "http://localhost:3001" }));
+
 // endpoints
 app.use("/api/v1/employeesInfo", employeeInfoRouter);
 app.use("/api/v1/employeeTypes", employeeTypeRouter);
@@ -30,10 +34,12 @@ app.use("/api/v1/workCalenders", workCalenderRouter);
 app.use("/api/v1/employeePayElements", employeePayElementRouter);
 app.use("/api/v1/employeeDesignations", employeeDesignationRouter);
 app.use("/api/v1/employeeSalaries", employeeSalaryRouter);
+app.use("/api/v1/employeeJobs", employeeJobRouter);
 app.use(
   "/api/v1/employeePerFormanceCriteria",
   employeePerFormanceCriteriaRouter
 );
+app.use("/api/v1/employeePerFormanceEvaluations", employeeEvaluationRouter);
 
 // error handlers middlewares
 app.use(errorHandlerMiddleware);

@@ -2,6 +2,7 @@ const { StatusCodes } = require("http-status-codes");
 const EmployeePayElement = require("../models/EmployeePayElement");
 
 const { BadRequestError, NotFoundError } = require("../errors");
+const EmployeeInfo = require("../models/EmployeeInfo");
 
 const getEmployeePayElements = async (req, res) => {
   const employeePayElement = await EmployeePayElement.find();
@@ -11,20 +12,34 @@ const getEmployeePayElements = async (req, res) => {
 };
 
 const createEmployeePayElement = async (req, res) => {
-  const { element_type, processing_type, entry_type, start_date, end_date } =
-    req.body;
+  const {
+    element_type,
+    employee_username,
+    processing_type,
+    entry_type,
+    start_date,
+    end_date,
+  } = req.body;
   if (!element_type || !start_date || !end_date) {
     throw new BadRequestError(
       "element_type start_date, end_date are required fields !"
     );
   }
-  const newPayElement = await EmployeePayElement.create({
+  const newPayElement = EmployeePayElement({
     element_type,
     processing_type,
     entry_type,
     start_date,
     end_date,
   });
+
+  const [employeeInfo] = await EmployeeInfo.find({
+    username: employee_username,
+  });
+  employeeInfo.employeePayElement.push(newPayElement);
+  await employeeInfo.save();
+  newPayElement.employeeInfo = employeeInfo._id;
+  await newPayElement.save();
   res.status(StatusCodes.CREATED).json({ newPayElement });
 };
 
@@ -55,6 +70,7 @@ const deleteEmployeePayElement = async (req, res) => {
 
 const updateEmployeePayElement = async (req, res) => {
   const payElementId = req.params.payElementId.slice(1);
+  const { end_date, start_date, entry_type } = req.body;
   const employeePayElement = await EmployeePayElement.findById(payElementId);
   if (!employeePayElement) {
     throw new NotFoundError(
@@ -64,10 +80,10 @@ const updateEmployeePayElement = async (req, res) => {
   if (Object.keys(req.body).length === 0) {
     throw new BadRequestError("Can not update with empty Object");
   }
-  const updatedPayElementRequest = req.body;
+
   const updatedEmployeePayElement = await EmployeePayElement.findByIdAndUpdate(
     payElementId,
-    updatedPayElementRequest,
+    { end_date, start_date, entry_type },
     {
       new: true,
     }

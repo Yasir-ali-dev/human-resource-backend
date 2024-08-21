@@ -21,7 +21,7 @@ const employeePerformanceCriteriaSchema = mongoose.Schema({
   total: {
     type: Number,
     min: 0,
-    max: 100,
+    max: 10,
   },
   is_group: {
     type: Boolean,
@@ -32,3 +32,4 @@ module.exports = mongoose.model(
   "EmployeePerformanceCriteria",
   employeePerformanceCriteriaSchema
 );
+module.exports = { employeePerformanceCriteriaSchema };

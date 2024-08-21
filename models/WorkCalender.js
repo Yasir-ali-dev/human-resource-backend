@@ -20,4 +20,8 @@ const workCalenderSchema = mongoose.Schema({
     max: [7, "work_hours_per_day should be less than or eqaul 7"],
   },
 });
-module.exports = mongoose.model("WorkCalender", workCalenderSchema);
+
+module.exports = {
+  workCalenderSchema,
+  WorkCalender: mongoose.model("WorkCalender", workCalenderSchema),
+};

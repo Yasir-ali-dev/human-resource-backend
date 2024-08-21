@@ -8,9 +8,11 @@ const employeeDesignationSchema = mongoose.Schema({
     required: [true, "employee type is required"],
   },
 });
-module.exports = mongoose.model(
-  "EmployeeDesignation",
-  employeeDesignationSchema
-);
 
-/* employee grade should be corrected*/
+module.exports = {
+  employeeDesignationSchema,
+  EmployeeDesignation: mongoose.model(
+    "EmployeeDesignation",
+    employeeDesignationSchema
+  ),
+};

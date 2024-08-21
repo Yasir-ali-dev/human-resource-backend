@@ -1,6 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
 const EmployeeSalary = require("../models/EmployeeSalary");
 const { BadRequestError, NotFoundError } = require("../errors");
+const EmployeeInfo = require("../models/EmployeeInfo");
 
 const getAllEmployeeSalaries = async (req, res) => {
   const employeeSalaries = await EmployeeSalary.find();
@@ -11,6 +12,7 @@ const getAllEmployeeSalaries = async (req, res) => {
 
 const createEmployeeSalary = async (req, res) => {
   const {
+    employee_username,
     lastIncrementId,
     effectiveFromDate,
     creationDate,
@@ -22,7 +24,16 @@ const createEmployeeSalary = async (req, res) => {
   if (!newSalary) {
     throw new BadRequestError("newSalary is required fields !");
   }
-  const newEmployeeSalary = await EmployeeSalary.create({
+  const [employeeInfo] = await EmployeeInfo.find({
+    username: employee_username,
+  });
+  if (!employeeInfo) {
+    throw new NotFoundError(
+      `employee info not found with username "${employee_username}"`
+    );
+  }
+
+  const newEmployeeSalary = EmployeeSalary({
     lastIncrementId,
     effectiveFromDate,
     creationDate,
@@ -31,6 +42,10 @@ const createEmployeeSalary = async (req, res) => {
     changeAmount,
     changePercentage,
   });
+  newEmployeeSalary.employeeInfo = employeeInfo._id;
+  await newEmployeeSalary.save();
+  employeeInfo.employeeSalary.push(newEmployeeSalary);
+  await employeeInfo.save();
   res.status(StatusCodes.CREATED).json({ newEmployeeSalary });
 };
 
