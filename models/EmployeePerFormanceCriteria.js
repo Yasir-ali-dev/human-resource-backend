@@ -28,8 +28,9 @@ const employeePerformanceCriteriaSchema = mongoose.Schema({
     default: false,
   },
 });
-module.exports = mongoose.model(
-  "EmployeePerformanceCriteria",
-  employeePerformanceCriteriaSchema
-);
-module.exports = { employeePerformanceCriteriaSchema };
+module.exports = {
+  EmployeePerformanceCriteria: mongoose.model(
+    "EmployeePerformanceCriteria",
+    employeePerformanceCriteriaSchema
+  ),
+};

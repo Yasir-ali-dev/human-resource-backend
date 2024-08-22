@@ -1,10 +1,14 @@
 const { StatusCodes } = require("http-status-codes");
-const EmployeePerFormanceCriteria = require("../models/EmployeePerFormanceCriteria");
 
 const { BadRequestError, NotFoundError } = require("../errors");
 
+const {
+  EmployeePerformanceCriteria,
+} = require("../models/EmployeePerFormanceCriteria");
+
 const getEmployeesPerFormanceCriteria = async (req, res) => {
-  const employeePerFormanceCriteria = await EmployeePerFormanceCriteria.find();
+  const employeePerFormanceCriteria = await EmployeePerformanceCriteria.find();
+
   res.status(StatusCodes.OK).json({
     employeePerFormanceCriteria,
     length: employeePerFormanceCriteria.length,

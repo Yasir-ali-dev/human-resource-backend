@@ -28,6 +28,18 @@ const employeeSalarySchema = mongoose.Schema({
     ref: "EmployeeInfo",
   },
 });
+
+employeeSalarySchema.post("findOneAndDelete", async (doc) => {
+  if (doc) {
+    await mongoose
+      .model("EmployeeInfo")
+      .updateOne(
+        { _id: doc.employeeInfo },
+        { $pull: { employeeSalary: doc.id } }
+      );
+  }
+});
+
 module.exports = mongoose.model("EmployeeSalary", employeeSalarySchema);
 
 /* employee salary should be corrected tested*/

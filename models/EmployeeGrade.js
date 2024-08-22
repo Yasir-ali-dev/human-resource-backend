@@ -15,6 +15,7 @@ const employeeGradeSchema = mongoose.Schema({
     trim: true,
   },
 });
+
 module.exports = {
   employeeGradeSchema,
   EmployeeGrade: mongoose.model("EmployeeGrade", employeeGradeSchema),

@@ -32,7 +32,7 @@ const employeePerformanceEvaluationSchema = mongoose.Schema({
 });
 
 // should be redesigned
-employeePerformanceEvaluationSchema.post("findByIdAndDelete", async (doc) => {
+employeePerformanceEvaluationSchema.post("findOneAndDelete", async (doc) => {
   if (doc) {
     await mongoose
       .model("EmployeeInfo")
@@ -42,6 +42,7 @@ employeePerformanceEvaluationSchema.post("findByIdAndDelete", async (doc) => {
       );
   }
 });
+
 //
 module.exports = mongoose.model(
   "EmployeePerformanceEvaluation",

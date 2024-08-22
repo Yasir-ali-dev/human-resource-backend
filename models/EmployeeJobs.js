@@ -13,6 +13,7 @@ const employeeJobsSchema = mongoose.Schema({
     trim: true,
   },
 });
+
 module.exports = {
   employeeJobsSchema,
   EmployeeJobs: mongoose.model("EmployeeJobs", employeeJobsSchema),

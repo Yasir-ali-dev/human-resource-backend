@@ -136,7 +136,6 @@ const EmployeeInfoSchema = mongoose.Schema({
   workCalender: workCalenderSchema,
   employeeJob: employeeJobsSchema,
   employeeDesignation: employeeDesignationSchema,
-  //
   employeePayElement: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -155,6 +154,24 @@ const EmployeeInfoSchema = mongoose.Schema({
       ref: "EmployeePerformanceEvaluation",
     },
   ],
+});
+
+EmployeeInfoSchema.post("findOneAndDelete", async (doc) => {
+  if (doc) {
+    await mongoose
+      .model("EmployeePerformanceEvaluation")
+      .deleteMany({ employeeInfo: doc._id });
+
+    await mongoose.model("EmployeeSalary").deleteMany({
+      employeeInfo: doc._id,
+    });
+
+    await mongoose.model("EmployeePayElement").deleteMany({
+      employeeInfo: doc._id,
+    });
+
+    console.log("employee performance, employee salary also deleted");
+  }
 });
 
 module.exports = mongoose.model("EmployeeInfo", EmployeeInfoSchema);

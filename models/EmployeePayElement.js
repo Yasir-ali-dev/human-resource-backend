@@ -32,4 +32,16 @@ const employeePayElementSchema = mongoose.Schema({
     ref: "EmployeeInfo",
   },
 });
+
+employeePayElementSchema.post("findOneAndDelete", async (doc) => {
+  if (doc) {
+    await mongoose
+      .model("EmployeeInfo")
+      .updateOne(
+        { _id: doc.employeeInfo },
+        { $pull: { employeePayElement: doc.id } }
+      );
+  }
+});
+
 module.exports = mongoose.model("EmployeePayElement", employeePayElementSchema);

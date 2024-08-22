@@ -36,10 +36,15 @@ const createEmployeePayElement = async (req, res) => {
   const [employeeInfo] = await EmployeeInfo.find({
     username: employee_username,
   });
-  employeeInfo.employeePayElement.push(newPayElement);
-  await employeeInfo.save();
+  if (!employeeInfo) {
+    throw new BadRequestError(
+      `employee not found with username ${employee_username}`
+    );
+  }
   newPayElement.employeeInfo = employeeInfo._id;
+  employeeInfo.employeePayElement.push(newPayElement);
   await newPayElement.save();
+  await employeeInfo.save();
   res.status(StatusCodes.CREATED).json({ newPayElement });
 };
 
