@@ -24,7 +24,7 @@ const createEmployeePerFormanceCriteria = async (req, res) => {
     );
   }
   const newEmployeePerFormanceCriteria =
-    await EmployeePerFormanceCriteria.create({
+    await EmployeePerformanceCriteria.create({
       type,
       name,
       criteria,
@@ -37,7 +37,7 @@ const createEmployeePerFormanceCriteria = async (req, res) => {
 const getEmployeePerFormanceCriteriaById = async (req, res) => {
   const performanceCriteriaId = req.params.performanceCriteriaId.slice(1);
   const employeePerFormanceCriteria =
-    await EmployeePerFormanceCriteria.findById(performanceCriteriaId);
+    await EmployeePerformanceCriteria.findById(performanceCriteriaId);
   if (!employeePerFormanceCriteria) {
     throw new NotFoundError(
       `employee PerFormance Criteria not found with ${performanceCriteriaId}`
@@ -49,7 +49,7 @@ const getEmployeePerFormanceCriteriaById = async (req, res) => {
 const deleteEmployeePerFormanceCriteriaById = async (req, res) => {
   const performanceCriteriaId = req.params.performanceCriteriaId.slice(1);
   const deletedEmployeePerFormanceCriteria =
-    await EmployeePerFormanceCriteria.findByIdAndDelete(performanceCriteriaId);
+    await EmployeePerformanceCriteria.findByIdAndDelete(performanceCriteriaId);
   if (!deletedEmployeePerFormanceCriteria) {
     throw new NotFoundError(
       `performance criteria not found with ${performanceCriteriaId}`
@@ -61,7 +61,7 @@ const deleteEmployeePerFormanceCriteriaById = async (req, res) => {
 const updateEmployeePerFormanceCriteriaById = async (req, res) => {
   const performanceCriteriaId = req.params.performanceCriteriaId.slice(1);
   const employeePerFormanceCriteria =
-    await EmployeePerFormanceCriteria.findById(performanceCriteriaId);
+    await EmployeePerformanceCriteria.findById(performanceCriteriaId);
   if (!employeePerFormanceCriteria) {
     throw new NotFoundError(
       `employee PerFormance Criteria not found with ${performanceCriteriaId}`
@@ -73,7 +73,7 @@ const updateEmployeePerFormanceCriteriaById = async (req, res) => {
   const updatedPerformanceCriteria = req.body;
 
   const updatedEmployeePerFormanceCriteria =
-    await EmployeePerFormanceCriteria.findByIdAndUpdate(
+    await EmployeePerformanceCriteria.findByIdAndUpdate(
       performanceCriteriaId,
       updatedPerformanceCriteria,
       {

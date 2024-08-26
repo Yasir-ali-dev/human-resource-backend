@@ -28,7 +28,7 @@ const employeePayElementSchema = mongoose.Schema({
     required: [true, "end date is required"],
   },
   employeeInfo: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: "EmployeeInfo",
   },
 });

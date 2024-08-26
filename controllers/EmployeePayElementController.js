@@ -41,7 +41,7 @@ const createEmployeePayElement = async (req, res) => {
       `employee not found with username ${employee_username}`
     );
   }
-  newPayElement.employeeInfo = employeeInfo._id;
+  newPayElement.employeeInfo = employeeInfo.username;
   employeeInfo.employeePayElement.push(newPayElement);
   await newPayElement.save();
   await employeeInfo.save();

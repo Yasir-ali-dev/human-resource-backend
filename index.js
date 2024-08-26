@@ -18,6 +18,8 @@ const employeeDesignationRouter = require("./routes/EmployeeDesignationRoutes");
 const employeeSalaryRouter = require("./routes/EmployeeSalaryRoutes");
 const employeeJobRouter = require("./routes/EmployeeJobRoutes");
 const employeeEvaluationRouter = require("./routes/EmployeePerformanceEvaluationRoutes");
+const EmployeeInfo = require("./models/EmployeeInfo");
+const { default: mongoose } = require("mongoose");
 
 const app = express();
 
@@ -40,10 +42,15 @@ app.use(
   employeePerFormanceCriteriaRouter
 );
 app.use("/api/v1/employeePerFormanceEvaluations", employeeEvaluationRouter);
+//
 
 // error handlers middlewares
 app.use(errorHandlerMiddleware);
 app.use("*", notFoundError);
+
+// Remove the model if it exists
+delete mongoose.Model["ModelName"];
+delete mongoose.Schema["ModelName"];
 
 // connection
 const port = process.env.PORT;

@@ -12,8 +12,6 @@ router
   .delete(getEmployeesInfo.deleteEmployeeInfo)
   .patch(getEmployeesInfo.updateEmployeeInfo);
 
-router.route("/id/:employeeId").get(getEmployeesInfo.getEmployeeByEmployeeId);
-
-router.route("/username/:username").get(getEmployeesInfo.getEmployeeByUsername);
+router.route("/employee/:username").get(getEmployeesInfo.getEmployeeByUsername);
 
 module.exports = router;

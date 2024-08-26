@@ -4,12 +4,12 @@ const { employeeGradeSchema } = require("./EmployeeGrade");
 const { workCalenderSchema } = require("./WorkCalender");
 const { employeeJobsSchema } = require("./EmployeeJobs");
 const { employeeDesignationSchema } = require("./EmployeeDesignation");
+const { v4: uuidv4 } = require("uuid");
 
-const EmployeeInfoSchema = mongoose.Schema({
+const EmployeeInfoSchema = new mongoose.Schema({
   employee_id: {
     type: String,
-    required: [true, "employee_id is required"],
-    unique: [true, "employee_id must be unique"],
+    default: uuidv4(),
   },
   username: {
     type: String,
@@ -18,7 +18,7 @@ const EmployeeInfoSchema = mongoose.Schema({
   },
   department_name: {
     type: String,
-    required: [true, "email is required"],
+    required: [true, "department_name is required"],
     lowercase: true,
   },
   email: {
@@ -34,15 +34,12 @@ const EmployeeInfoSchema = mongoose.Schema({
   },
   role: {
     type: String,
-    required: [true, "role is required"],
   },
   status: {
     type: String,
-    required: [true, "status is required"],
   },
   report_to: {
     type: String,
-    required: [true, "report to is required"],
   },
   shift: {
     type: String,
@@ -67,20 +64,13 @@ const EmployeeInfoSchema = mongoose.Schema({
   },
   work_phone: {
     type: String,
-    required: [true, "phone is required"],
-  },
-  personal_email: {
-    type: String,
-    unique: [true, "email must be unique"],
-    match:
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
   },
   nationality: {
     type: String,
   },
   gender: {
     type: String,
-    required: [true, "gender is required"],
+    lowercase: true,
     enum: ["male", "female", "others"],
   },
   current_address: {
@@ -120,7 +110,6 @@ const EmployeeInfoSchema = mongoose.Schema({
   working_status: {
     type: String,
     default: "active",
-    enum: ["active", "inactive"],
   },
   is_sales_representative: {
     type: Boolean,
