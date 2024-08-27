@@ -2,7 +2,7 @@ const { default: mongoose } = require("mongoose");
 
 const employeeSalarySchema = mongoose.Schema({
   lastIncrementId: {
-    type: mongoose.Types.ObjectId,
+    type: String,
   },
   effectiveFromDate: {
     type: Date,
@@ -24,7 +24,7 @@ const employeeSalarySchema = mongoose.Schema({
     type: Number,
   },
   employeeInfo: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: "EmployeeInfo",
   },
 });
@@ -34,8 +34,8 @@ employeeSalarySchema.post("findOneAndDelete", async (doc) => {
     await mongoose
       .model("EmployeeInfo")
       .updateOne(
-        { _id: doc.employeeInfo },
-        { $pull: { employeeSalary: doc.id } }
+        { username: doc.employeeInfo },
+        { $pull: { employeeSalary: doc._id } }
       );
   }
 });

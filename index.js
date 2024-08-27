@@ -35,7 +35,7 @@ app.use("/api/v1/employeeGrades", employeeGradeRouter);
 app.use("/api/v1/workCalenders", workCalenderRouter);
 app.use("/api/v1/employeePayElements", employeePayElementRouter);
 app.use("/api/v1/employeeDesignations", employeeDesignationRouter);
-app.use("/api/v1/employeeSalaries", employeeSalaryRouter);
+app.use("/api/v1/ ", employeeSalaryRouter);
 app.use("/api/v1/employeeJobs", employeeJobRouter);
 app.use(
   "/api/v1/employeePerFormanceCriteria",
@@ -47,10 +47,6 @@ app.use("/api/v1/employeePerFormanceEvaluations", employeeEvaluationRouter);
 // error handlers middlewares
 app.use(errorHandlerMiddleware);
 app.use("*", notFoundError);
-
-// Remove the model if it exists
-delete mongoose.Model["ModelName"];
-delete mongoose.Schema["ModelName"];
 
 // connection
 const port = process.env.PORT;

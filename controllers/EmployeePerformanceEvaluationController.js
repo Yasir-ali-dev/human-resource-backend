@@ -40,7 +40,7 @@ const createEmployeePerformanceEvaluation = async (req, res) => {
     newEmployeePerformanceEvaluation
   );
   await employeeInfo.save();
-  newEmployeePerformanceEvaluation.employeeInfo = employeeInfo._id;
+  newEmployeePerformanceEvaluation.employeeInfo = employeeInfo.username;
   await newEmployeePerformanceEvaluation.save();
   res.status(StatusCodes.CREATED).json({ newEmployeePerformanceEvaluation });
 };

@@ -1,10 +1,11 @@
 const { default: mongoose } = require("mongoose");
 const { v4: uuid } = require("uuid");
+const { randomUUID } = require("crypto");
 
 const employeePerformanceEvaluationSchema = mongoose.Schema({
   transactionNumber: {
     type: String,
-    default: uuid,
+    default: () => randomUUID().toString(),
   },
   transactionDate: {
     type: Date,
@@ -25,8 +26,11 @@ const employeePerformanceEvaluationSchema = mongoose.Schema({
     type: Number,
     min: 0,
   },
+  supervisor: {
+    type: String,
+  },
   employeeInfo: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: "EmployeeInfo",
   },
 });
@@ -37,8 +41,8 @@ employeePerformanceEvaluationSchema.post("findOneAndDelete", async (doc) => {
     await mongoose
       .model("EmployeeInfo")
       .updateOne(
-        { _id: doc.employeeInfo },
-        { $pull: { employeePerformanceEvaluation: doc.id } }
+        { username: doc.employeeInfo },
+        { $pull: { employeePerformanceEvaluation: doc._id } }
       );
   }
 });

@@ -35,9 +35,7 @@ const EmployeeInfoSchema = new mongoose.Schema({
   role: {
     type: String,
   },
-  status: {
-    type: String,
-  },
+
   report_to: {
     type: String,
   },

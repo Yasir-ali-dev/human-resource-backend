@@ -32,7 +32,6 @@ const createEmployeeSalary = async (req, res) => {
       `employee info not found with username "${employee_username}"`
     );
   }
-
   const newEmployeeSalary = EmployeeSalary({
     lastIncrementId,
     effectiveFromDate,
@@ -42,7 +41,7 @@ const createEmployeeSalary = async (req, res) => {
     changeAmount,
     changePercentage,
   });
-  newEmployeeSalary.employeeInfo = employeeInfo._id;
+  newEmployeeSalary.employeeInfo = employeeInfo.username;
   await newEmployeeSalary.save();
   employeeInfo.employeeSalary.push(newEmployeeSalary);
   await employeeInfo.save();
