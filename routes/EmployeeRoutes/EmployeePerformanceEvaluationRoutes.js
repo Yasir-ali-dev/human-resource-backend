@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const employeePerformanceEvaluation = require("../controllers/EmployeePerformanceEvaluationController");
+const employeePerformanceEvaluation = require("../../controllers/EmployeeControllers/EmployeePerformanceEvaluationController");
 router
   .route("/")
   .get(employeePerformanceEvaluation.getAllEmployeePerformanceEvaluations)

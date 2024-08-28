@@ -1,6 +1,8 @@
 const { StatusCodes } = require("http-status-codes");
-const { EmployeeDesignation } = require("../models/EmployeeDesignation");
-const { BadRequestError, NotFoundError } = require("../errors");
+const {
+  EmployeeDesignation,
+} = require("../../models/EmployeeModels/EmployeeDesignation");
+const { BadRequestError, NotFoundError } = require("../../errors/index");
 
 const getAllEmployeeDesignations = async (req, res) => {
   const allEmployeeDesignations = await EmployeeDesignation.find();
@@ -36,12 +38,12 @@ const deleteEmployeeDesignation = async (req, res) => {
 
   const deletedEmployeeDesignation =
     await EmployeeDesignation.findByIdAndDelete(designationId);
-  if (!deletedEmployeeDesignation) {
-    throw new NotFoundError(
-      `employee designation not found with ${designationId}`
-    );
+  if (deletedEmployeeDesignation) {
+    return res.status(StatusCodes.OK).json({ deletedEmployeeDesignation });
   }
-  res.status(StatusCodes.OK).json({ deletedEmployeeDesignation });
+  throw new NotFoundError(
+    `employee designation not found with ${designationId}`
+  );
 };
 
 const updateEmployeeDesignation = async (req, res) => {

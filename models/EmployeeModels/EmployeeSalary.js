@@ -31,15 +31,16 @@ const employeeSalarySchema = mongoose.Schema({
 
 employeeSalarySchema.post("findOneAndDelete", async (doc) => {
   if (doc) {
-    await mongoose
-      .model("EmployeeInfo")
-      .updateOne(
-        { username: doc.employeeInfo },
-        { $pull: { employeeSalary: doc._id } }
-      );
+    try {
+      await mongoose
+        .model("EmployeeInfo")
+        .updateOne(
+          { username: doc.employeeInfo },
+          { $pull: { employeeSalary: doc._id } }
+        );
+    } catch (error) {
+      console.error(error.message);
+    }
   }
 });
-
 module.exports = mongoose.model("EmployeeSalary", employeeSalarySchema);
-
-/* employee salary should be corrected tested*/

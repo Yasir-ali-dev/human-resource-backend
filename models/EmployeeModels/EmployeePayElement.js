@@ -35,12 +35,16 @@ const employeePayElementSchema = mongoose.Schema({
 
 employeePayElementSchema.post("findOneAndDelete", async (doc) => {
   if (doc) {
-    await mongoose
-      .model("EmployeeInfo")
-      .updateOne(
-        { _id: doc.employeeInfo },
-        { $pull: { employeePayElement: doc.id } }
-      );
+    try {
+      await mongoose
+        .model("EmployeeInfo")
+        .updateOne(
+          { username: doc.employeeInfo },
+          { $pull: { employeePayElement: doc._id } }
+        );
+    } catch (error) {
+      console.error(error);
+    }
   }
 });
 

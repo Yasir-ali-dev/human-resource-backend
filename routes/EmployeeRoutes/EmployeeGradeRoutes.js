@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const employeeGrade = require("../controllers/EmployeeGradeController");
+const employeeGrade = require("../../controllers/EmployeeControllers/EmployeeGradeController");
 router
   .route("/")
   .get(employeeGrade.getAllEmployeeGrades)

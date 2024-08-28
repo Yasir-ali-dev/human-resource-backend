@@ -1,6 +1,6 @@
 const { StatusCodes } = require("http-status-codes");
-const { EmployeeType } = require("../models/EmployeeType");
-const { BadRequestError, NotFoundError } = require("../errors");
+const { EmployeeType } = require("../../models/EmployeeModels/EmployeeType");
+const { BadRequestError, NotFoundError } = require("../../errors");
 
 const getAllEmployeeTypes = async (req, res) => {
   const allEmployeeTypes = await EmployeeType.find();

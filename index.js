@@ -8,19 +8,16 @@ const cors = require("cors");
 const errorHandlerMiddleware = require("./middlewares/GlobalErrorHandler");
 const notFoundError = require("./middlewares/NotFound");
 // routers
-const employeeTypeRouter = require("./routes/EmployeeTypeRoute");
-const employeeInfoRouter = require("./routes/EmployeeInfoRoutes");
-const employeeGradeRouter = require("./routes/EmployeeGradeRoutes");
-const workCalenderRouter = require("./routes/WorkCalenderRoutes");
-const employeePayElementRouter = require("./routes/EmployeePayElementRoutes");
-const employeePerFormanceCriteriaRouter = require("./routes/EmployeePerFormanceCriteriaRoutes");
-const employeeDesignationRouter = require("./routes/EmployeeDesignationRoutes");
-const employeeSalaryRouter = require("./routes/EmployeeSalaryRoutes");
-const employeeJobRouter = require("./routes/EmployeeJobRoutes");
-const employeeEvaluationRouter = require("./routes/EmployeePerformanceEvaluationRoutes");
-const EmployeeInfo = require("./models/EmployeeInfo");
-const { default: mongoose } = require("mongoose");
-
+const employeeTypeRouter = require("./routes/EmployeeRoutes/EmployeeTypeRoute");
+const employeeInfoRouter = require("./routes/EmployeeRoutes/EmployeeInfoRoutes");
+const employeeGradeRouter = require("./routes/EmployeeRoutes/EmployeeGradeRoutes");
+const workCalenderRouter = require("./routes/EmployeeRoutes/WorkCalenderRoutes");
+const employeePayElementRouter = require("./routes/EmployeeRoutes/EmployeePayElementRoutes");
+const employeePerFormanceCriteriaRouter = require("./routes/EmployeeRoutes/EmployeePerFormanceCriteriaRoutes");
+const employeeDesignationRouter = require("./routes/EmployeeRoutes/EmployeeDesignationRoutes");
+const employeeSalaryRouter = require("./routes/EmployeeRoutes/EmployeeSalaryRoutes");
+const employeeJobRouter = require("./routes/EmployeeRoutes/EmployeeJobRoutes");
+const employeeEvaluationRouter = require("./routes/EmployeeRoutes/EmployeePerformanceEvaluationRoutes");
 const app = express();
 
 // middlewares
@@ -35,7 +32,7 @@ app.use("/api/v1/employeeGrades", employeeGradeRouter);
 app.use("/api/v1/workCalenders", workCalenderRouter);
 app.use("/api/v1/employeePayElements", employeePayElementRouter);
 app.use("/api/v1/employeeDesignations", employeeDesignationRouter);
-app.use("/api/v1/ ", employeeSalaryRouter);
+app.use("/api/v1/employeeSalaries", employeeSalaryRouter);
 app.use("/api/v1/employeeJobs", employeeJobRouter);
 app.use(
   "/api/v1/employeePerFormanceCriteria",

@@ -1,6 +1,6 @@
 const { StatusCodes } = require("http-status-codes");
-const { EmployeeGrade } = require("../models/EmployeeGrade");
-const { BadRequestError, NotFoundError } = require("../errors");
+const { EmployeeGrade } = require("../../models/EmployeeModels/EmployeeGrade");
+const { BadRequestError, NotFoundError } = require("../../errors");
 
 const getAllEmployeeGrades = async (req, res) => {
   const allEmployeeGrades = await EmployeeGrade.find();

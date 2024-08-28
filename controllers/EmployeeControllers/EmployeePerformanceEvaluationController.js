@@ -1,7 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
-const { BadRequestError, NotFoundError } = require("../errors");
-const EmployeePerformanceEvaluation = require("../models/EmployeePerformanceEvaluation");
-const EmployeeInfo = require("../models/EmployeeInfo");
+const { BadRequestError, NotFoundError } = require("../../errors");
+const EmployeePerformanceEvaluation = require("../../models/EmployeeModels/EmployeePerformanceEvaluation");
+const EmployeeInfo = require("../../models/EmployeeModels/EmployeeInfo");
 
 const getAllEmployeePerformanceEvaluations = async (req, res) => {
   const allEmployeePerformanceEvaluations =

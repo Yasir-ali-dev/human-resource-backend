@@ -44,7 +44,7 @@ const EmployeeInfoSchema = new mongoose.Schema({
     default: "morning",
     enum: ["morning", "night", "evening"],
   },
-  date_of_birth: {
+  birth_date: {
     type: Date,
   },
   martial_status: {
@@ -104,7 +104,9 @@ const EmployeeInfoSchema = new mongoose.Schema({
     type: String,
     required: [true, "payroll is required"],
   },
-
+  cnic: {
+    type: String,
+  },
   working_status: {
     type: String,
     default: "active",
@@ -145,19 +147,21 @@ const EmployeeInfoSchema = new mongoose.Schema({
 
 EmployeeInfoSchema.post("findOneAndDelete", async (doc) => {
   if (doc) {
-    await mongoose
+    const evolution = await mongoose
       .model("EmployeePerformanceEvaluation")
-      .deleteMany({ employeeInfo: doc._id });
+      .deleteMany({ employeeInfo: doc.id });
 
-    await mongoose.model("EmployeeSalary").deleteMany({
+    const salary = await mongoose.model("EmployeeSalary").deleteMany({
       employeeInfo: doc._id,
     });
 
-    await mongoose.model("EmployeePayElement").deleteMany({
-      employeeInfo: doc._id,
+    const payElement = await mongoose.model("EmployeePayElement").deleteMany({
+      employeeInfo: doc.id,
     });
 
-    console.log("employee performance, employee salary also deleted");
+    console.log("pay element ", payElement);
+    console.log("employee evolution ", evolution);
+    console.log("employee salary ", salary);
   }
 });
 

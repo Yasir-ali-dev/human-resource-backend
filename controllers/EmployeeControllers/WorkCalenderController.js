@@ -1,7 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
-const { WorkCalender } = require("../models/WorkCalender");
+const { WorkCalender } = require("../../models/EmployeeModels/WorkCalender");
 
-const { BadRequestError, NotFoundError } = require("../errors");
+const { BadRequestError, NotFoundError } = require("../../errors");
 
 const getWorkCalender = async (req, res) => {
   const workCalender = await WorkCalender.find();

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const employeeDesignation = require("../controllers/EmployeeDesignationController");
+const employeeDesignation = require("../../controllers/EmployeeControllers/EmployeeDesignationController");
 
 router
   .route("/")

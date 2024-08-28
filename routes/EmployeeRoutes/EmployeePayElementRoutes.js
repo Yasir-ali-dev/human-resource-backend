@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const employeePayElement = require("../controllers/EmployeePayElementController");
+const employeePayElement = require("../../controllers/EmployeeControllers/EmployeePayElementController");
 
 router
   .route("/")

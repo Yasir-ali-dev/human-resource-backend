@@ -1,7 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
-const EmployeeSalary = require("../models/EmployeeSalary");
-const { BadRequestError, NotFoundError } = require("../errors");
-const EmployeeInfo = require("../models/EmployeeInfo");
+const EmployeeSalary = require("../../models/EmployeeModels/EmployeeSalary");
+const { BadRequestError, NotFoundError } = require("../../errors");
+const EmployeeInfo = require("../../models/EmployeeModels/EmployeeInfo");
 
 const getAllEmployeeSalaries = async (req, res) => {
   const employeeSalaries = await EmployeeSalary.find();
